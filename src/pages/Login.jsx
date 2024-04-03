@@ -16,13 +16,12 @@ export const Login = () => {
 
   const submitHandler = async (data) => {
     try{
-      // const res= await axios.post("http://localhost:8000/users/login", data)
       const res = await axios.post("http://localhost:8000/users/login", data);
         console.log(res);
         toast.success("Login success");
         localStorage.setItem("id", res.data.data._id);
         console.log("data", data);
-        navigate("/dashboard");
+        window.location.href = "/home"
     }
     catch(err){
         toast.error('login error');
@@ -36,7 +35,6 @@ export const Login = () => {
         <div className="col-lg-6 col-md-6 form-container">
           <div className="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
             <div className="logo mt-5 mb-3">
-              {/* <img src="image/logo.png" width="150px" /> */}
               <h1>LOGIN HERE</h1>
             </div>
             <div className="heading mb-3">

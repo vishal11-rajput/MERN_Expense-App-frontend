@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MdDashboardCustomize, PiUsersFourFill,FaMoneyBills  } from "react-icons/md";
+import { MdSpaceDashboard } from "react-icons/md";
+import { MdAccountBalanceWallet } from "react-icons/md";
+import { MdHome } from "react-icons/md";
+import { MdAddToPhotos } from "react-icons/md";
+import { ImUsers } from "react-icons/im";
 import { Login } from "./Login";
+
 
 export const Sidebar = () => {
   const path = window.location.pathname;
 
-  const serviceProviderLinks = [
+  const adminLinks = [
     {
       name: "Add Expense",
       link: "/serviceprovider/dashboard",
@@ -19,24 +24,31 @@ export const Sidebar = () => {
 
   const userLinks = [
     {
-      name: "User Dashboard",
-      link: "/user/dashboard",
-      icon: <MdDashboardCustomize />
+      name: "Home",
+      link: "/home",
+      icon: <MdHome/>
     },
+    {
+      name: "Dashboard",
+      link: "/dashboard",
+      icon: <MdSpaceDashboard/>
+    },    
     {
       name: "Add Expense",
       link: "/user/add-expense",
+      icon: <MdAddToPhotos/>
     },
     {
-      name: "All Expenses",
+      name: "All Expense",
       link: "/user/all-expenses",
-      // icon: <FaMoneyBills/>
+      icon: <MdAccountBalanceWallet/>
     },
     {
       name:'All Users',
       link:'/all-users',
-      // icon: <PiUsersFourFill/>
-    }
+      icon:<ImUsers/>
+    },
+        
   ];
 
   return (
@@ -49,20 +61,16 @@ export const Sidebar = () => {
         </div>
 
         <ul className="nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="/dashboard">
-              <i className="nc-icon nc-chart-pie-35" />
-              <p>Dashboard</p>
-            </a>
-          </li>
-
-          {path.includes("serviceprovider")
-            ? serviceProviderLinks.map((serpro) => {
+         
+          {path.includes("adm")
+            ? adminLinks.map((adm) => {
                 return (
                   <li>
-                    <Link className="nav-link" to={serpro.link}>
+                    <Link className="nav-link" to={adm.link}>
+                     
+                      
                       <i className="nc-icon nc-chart-pie-35"></i>
-                      <p>{serpro.name}</p>
+                      <p>{adm.name}</p>
                     </Link>
                   </li>
                 );
@@ -71,17 +79,24 @@ export const Sidebar = () => {
                 return (
                   <li>
                     <Link className="nav-link" to={user.link}>
-                      <i className="nc-icon nc-circle-09"></i>
+                      <div ><span style={{fontSize: '25px',}}>
+                     <i>{user.icon}</i>
                      
-                      <p>{user.name}</p>
+                      </span>
+                      
+                      <p >{user.name}</p>
+                      </div>
+                      
+                      {/* <i className="nc-icon nc-circle-09"></i> */}
+                     
+                      
                     </Link>
                   </li>
                 );
               })}
         </ul>
-        
-          <div id="button-pos">
-          <ul>
+          <div >
+          <ul id="button-pos">
             <li className="nav-item active">
               <a className="nav-link" href="/login" id="logincss">
                 {/* <i className="nc-icon nc-chart-pie-35" /> */}
@@ -90,13 +105,15 @@ export const Sidebar = () => {
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="/signup" id="logincss">
+              <a className="nav-link" href="/profile" id="logincss">
                 {/* <i className="nc-icon nc-circle-09"></i>
                 <i className="nc-icon nc-chart-pie-35" /> */}
 
-                <p id="text1">SIGN </p>
+                <p id="text1">REGISTER </p>
               </a>
             </li>
+
+            
             </ul>
           </div>
        
