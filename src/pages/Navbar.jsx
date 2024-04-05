@@ -31,7 +31,7 @@ export const Navbar = () => {
     if(confirmed){
       localStorage.removeItem("id")
       toast.success("Logged out successfully")
-      navigate('/home')
+      navigate('/login')
     }
     else {
       return
@@ -86,7 +86,7 @@ export const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" id = 'nav-user' to="/profile">
                 <span className="no-icon">
-                  {userName == null ? "Account" : userName.name.toUpperCase()}</span>
+                  {userName == null ? 'Account' : userName.name.toUpperCase()}</span>
               </Link>
             </li>
             <li class="nav-item">
