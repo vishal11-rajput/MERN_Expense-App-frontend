@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import axios from "axios";
+import profilePic from '../../images/profile-male.jpg'
 
 export const Profile = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState([]);
 
-  useEffect(() => {
-    getUserById();
-  });
-  const getUserById = async (id) => {
+  const getUserData = async () => {
+    const id = localStorage.getItem("id")
     try {
       const res = await axios.get("http://localhost:8000/users/user/" + id);
-      console.log(res);
+      console.log(res.data.data);
       setUser(res.data.data);
     } catch (err) {
       console.log(err);
     }
   };
+  useEffect(() => {
+    getUserData();
+  },[]);
+
+  const name = "Vishal"
+
   return (
     <>
       <div className="container emp-profile">
@@ -24,9 +29,10 @@ export const Profile = () => {
           <div className="row">
             <div className="col-md-4">
               <div className="profile-img">
-                <div class="card">
+                <div class="card1">
                   <div className="card-img">
-                    <img src="https://i2-prod.dailystar.co.uk/incoming/article26216656.ece/ALTERNATES/s810/0_PROD-GettyImages-73510827.jpg" alt=""/>
+                    {user.profilePic == null  ? <img src={profilePic} alt="Profile Picture"/> : <img src={user.profilePic} alt="Profile Picture"/>}
+                    {/* <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D" alt=""/> */}
                   <a class="card-button" href="#link">
                     Edit Image
                   </a>
@@ -39,7 +45,7 @@ export const Profile = () => {
             </div>
             <div className="col-md-6">
               <div className="profile-head">
-                <h2>Vishalkumar Singh</h2>
+              <h2>{user.name && user.name.toUpperCase()}</h2>
                 {/* <h6></h6> */}
                 {/* <p className="proile-rating">RANKINGS : <span>8/10</span></p> */}
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -70,7 +76,7 @@ export const Profile = () => {
                       <label>Name</label>
                     </div>
                     <div className="col-md-6">
-                      <p>Kshiti123</p>
+                    <p> {user.name}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -78,7 +84,7 @@ export const Profile = () => {
                       <label>User Name</label>
                     </div>
                     <div className="col-md-6">
-                      <p>Kshiti Ghelani</p>
+                      <p>{user.name}_user</p>
                     </div>
                   </div>
                   <div className="row">
@@ -86,15 +92,16 @@ export const Profile = () => {
                       <label>Email</label>
                     </div>
                     <div className="col-md-6">
-                      <p>kshitighelani@gmail.com</p>
+                      <p>{user.email}</p>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-6">
                       <label>Phone</label>
                     </div>
+                    
                     <div className="col-md-6">
-                      <p>123 456 7890</p>
+                      { user.phone == null || user.phone == undefined ? <p>NA</p> : <p>{user.phone}</p>}
                     </div>
                   </div>
                   <div className="row">
@@ -102,7 +109,7 @@ export const Profile = () => {
                       <label>ROLE</label>
                     </div>
                     <div className="col-md-6">
-                      <p>Web Developer and Designer</p>
+                      {user.role == null || user.role == undefined ? <p>User</p> : <p>{user.role}</p>}
                     </div>
                   </div>
                 </div>
@@ -111,14 +118,16 @@ export const Profile = () => {
             </div>
               </div>
             </div>
-            <div className="col-md-2" >
+
+            {/* for profile edit button */}
+            {/* <div className="col-md-2" >
               <input
                 type="submit"
                 className="profile-edit-btn" 
                 name="btnAddMore"
                 value="Edit Profile"
               />
-            </div>
+            </div> */}
           </div>
           <div className="row">
            

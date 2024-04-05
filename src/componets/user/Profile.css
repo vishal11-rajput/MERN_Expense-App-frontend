@@ -102,7 +102,7 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
-.card {
+.card1 {
   /* width: 190px; */
   height: 254px;
   border-radius: 20px;
@@ -158,13 +158,13 @@ body{
 }
 
 /*Hover*/
-.card:hover {
+.card1:hover {
   border-color: #6c00f8;
   -webkit-box-shadow: 10px 5px 18px 0 rgba(255, 255, 255, 0.877);
   box-shadow: 10px 5px 18px 0 rgba(255, 255, 255, 0.877);
 }
 
-.card:hover .card-button {
+.card1:hover .card-button {
   -webkit-transform: translate(-50%, 50%);
   -ms-transform: translate(-50%, 50%);
   transform: translate(-50%, 50%);
