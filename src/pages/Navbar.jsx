@@ -86,7 +86,9 @@ export const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" id = 'nav-user' to="/profile">
                 <span className="no-icon">
-                  {userName == null ? 'Account' : userName.name.toUpperCase()}</span>
+                  {userName == null ? 'Account' : userName.name.toUpperCase()}
+                  {/* {userName == null ? 'Account' : userName.name} */}
+                  </span>
               </Link>
             </li>
             <li class="nav-item">

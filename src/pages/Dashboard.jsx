@@ -128,7 +128,7 @@ export const Dashboard = () => {
                 <hr />
                 <div style={{ padding: "20px", backgroundColor: "#EEEEFF" }}>
                   Category: Medical <br />
-                  Amount: 200
+                  Amount: 1000
                 </div>
                 <hr />
                 <div style={{ padding: "20px", backgroundColor: "#EEEEFF" }}>
