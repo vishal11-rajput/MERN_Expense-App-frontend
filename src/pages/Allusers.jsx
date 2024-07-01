@@ -7,6 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
 export const Allusers = () => {
+
+  const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
   const deleteUser = async (id) => {
     try {
       const res = await axios.delete("http://localhost:8000/users/user/" + id);
@@ -50,7 +55,7 @@ export const Allusers = () => {
       renderCell: (params) => {
         return (
           <div style={{ display: "flex", gap: "5px" }}>
-            <button className="btn btn-primary" onClick={() => editUser(params.row._id)}> <Link to={`/edituser/${params.row._id}`}>Edit</Link></button>
+            <button className="btn btn-primary" > <Link to={`/edit-user/${params.row._id}`}>Edit</Link></button>
             <Button
               variant="contained"
               style={{ background: "#e57373" }}

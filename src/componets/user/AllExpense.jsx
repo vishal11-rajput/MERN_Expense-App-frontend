@@ -4,6 +4,9 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 
 export const AllExpense = () => {
@@ -32,7 +35,7 @@ export const AllExpense = () => {
     const id = localStorage.getItem("id")
     if(id!==undefined || id !== null){
     try {
-      const res = await axios.get('http://localhost:8000/expenses/expense/'+id);
+      const res = await axios.get('http://localhost:8000/expenses/user-expense/'+id);
       console.log(res);
       
       console.log(res.data.data);
@@ -41,7 +44,7 @@ export const AllExpense = () => {
       
       toast.success('Received data from server')
     } catch (e) {
-      toast.error('No expenses found something wrong');
+      toast.error('Please Login');
     }
   }else{
     toast.error("Please login first")
@@ -63,8 +66,6 @@ export const AllExpense = () => {
                 <table className="table table-hover table-striped">
                   <thead>
                     <tr>
-                      <th>Sr No.</th>
-                      <th>ID</th>
                       <th>Amount</th>
                       <th>Category</th>
                       <th>Payment Method</th>
@@ -77,15 +78,14 @@ export const AllExpense = () => {
                   <tbody>
                     {expenses?.map((expense) => (
                       <tr key={expense._id}>
-                        <td>{srNo}</td>
-                        <td>{expense._id}</td>
-              
                         <td>{expense.amount}</td>
-                        <td>{expense.category}</td>
-                        <td>{expense.paymentMethod}</td>
+                        <td>{expense.category?.categoryName}</td>
+                        <td>{expense.paymentMode}</td>
                         {/* <td><a href="{expense.billUrl}">image</a></td> */}
                         <td>{expense.description}</td>
-                        <td> <button onClick= {()=>{deleteExpense(expense._id)}}>Delete</button> </td>
+
+                        <td> <Button> <Link to={`/update-user/${expense._id}`}>EDIT</Link> </Button></td>
+                        <td> <Button variant="danger" onClick= {()=>{deleteExpense(expense._id)}}>Delete</Button>{' '} </td>
                       </tr>
                     ))}
                   </tbody>
